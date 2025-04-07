@@ -1,61 +1,65 @@
+<!-- verify.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Email Verified</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f6f9fc;
-      color: #333;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f8;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
     }
+
     .container {
-      text-align: center;
       background: white;
       padding: 40px;
       border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
     }
+
+    .success-icon {
+      font-size: 48px;
+      color: green;
+    }
+
     h1 {
-      color: #2e7d32;
-      margin-bottom: 10px;
+      margin-top: 20px;
+      font-size: 26px;
+      color: #222;
     }
+
     p {
+      margin-top: 10px;
       font-size: 16px;
-      margin-bottom: 30px;
+      color: #555;
     }
-    button {
-      background-color: #2e7d32;
-      color: white;
+
+    .button {
+      display: inline-block;
+      margin-top: 25px;
       padding: 12px 24px;
+      background-color: #007aff;
+      color: white;
       border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #256528;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Email Verified ✅</h1>
-    <p>Your email has been successfully verified. You can now return to the app.</p>
-    <button onclick="handleClose()">Close</button>
+    <div class="success-icon">✅</div>
+    <h1>Email Verified!</h1>
+    <p>You can now return to the app and complete your registration.</p>
+    <a href="your-app-scheme://" class="button">Back to App</a>
   </div>
-
-  <script>
-    function handleClose() {
-      window.close();
-      alert("You can now return to the app or close this tab manually.");
-    }
-  </script>
 </body>
 </html>
