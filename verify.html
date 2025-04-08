@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Email + OTP Verification</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 40px;
+      max-width: 400px;
+      margin: auto;
+      background-color: #f0f4f8;
+    }
+    h2 {
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    .status {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>Verify your Email</h2>
+  <input type="email" id="email" placeholder="Enter your email" required />
+  <input type="text" id="otp" placeholder="Enter the OTP from the app" required />
+  <button onclick="verifyOTP()">Verify</button>
+
+  <div id="status" class="status"></div>
+
+  <script>
+    async function verifyOTP() {
+      const email = document.getElementById("email").value.trim();
+      const otp = document.getElementById("otp").value.trim();
+      const status = document.getElementById("status");
+
+      if (!email || !otp) {
+        status.textContent = "⚠️ Please enter both email and OTP.";
+        return;
+      }
+
+      try {
+        const response = await fetch("https://fmatkstxwdcevvlilysa.supabase.co/functions/v1/verify_otp", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer YOUR_ANON_KEY" // replace this
+          },
+          body: JSON.stringify({ email, otp })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          status.textContent = "✅ Verified! You can now log in using the app.";
+        } else {
+          status.textContent = "❌ " + (result.error || "Verification failed.");
+        }
+      } catch (err) {
+        status.textContent = "❌ Network error. Please try again.";
+      }
+    }
+  </script>
+</body>
+</html>
