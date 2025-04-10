@@ -111,7 +111,8 @@
         const response = await fetch("https://fmatkstxwdcevvlilysa.supabase.co/functions/v1/verify_otp", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Accept": "application/json"
           },
           body: JSON.stringify({ email, otp })
         });
@@ -122,11 +123,12 @@
         if (response.ok) {
           message.innerHTML = "✅ " + result.message + "<br>You may now close this tab and login through the app.";
         } else {
-          message.textContent = "❌ " + result.error;
+          message.textContent = "❌ " + result.error || "Something went wrong.";
         }
       } catch (err) {
         loading.style.display = "none";
         message.textContent = "❌ Network error. Please try again.";
+        console.error("Fetch error:", err);
       }
     }
   </script>
